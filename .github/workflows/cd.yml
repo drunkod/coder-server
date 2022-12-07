@@ -1,9 +1,11 @@
 name: 'CD (multi arch)'
+# on:
+#   push:
+#     tags:
+#       - 'v*'
 on:
-  push:
-    tags:
-      - 'v*'
-
+  workflow_dispatch:
+  
 jobs:
   docker-buildx:
     runs-on: ubuntu-latest
@@ -17,7 +19,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/raonigabriel/coder-server
+            ghcr.io/drunkod/coder-server
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -40,7 +42,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.TOKEN }}
       -
         name: Build and push
         uses: docker/build-push-action@v3
