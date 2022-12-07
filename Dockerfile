@@ -34,11 +34,12 @@ RUN wget https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLAR
 # Download 'openvscode-server'
 RUN \
    cd /tmp && \
+   sudo mkdir -p /tmp/staging/usr/lib && \
    wget https://github.com/cdr/code-server/releases/download/v$VERSION/code-server-$VERSION-linux-$TARGETARCH.tar.gz && \
-   tar xzf code-server-$VERSION-linux-$TARGETARCH.tar.gz && \
-   rm code-server-$VERSION-linux-$TARGETARCH/lib/node && \
-   rm code-server-$VERSION-linux-$TARGETARCH.tar.gz && \
-   mv code-server-$VERSION-linux-$TARGETARCH /tmp/staging/usr/lib/code-server
+   sudo tar xzf code-server-$VERSION-linux-$TARGETARCH.tar.gz && \
+   sudo rm code-server-$VERSION-linux-$TARGETARCH/lib/node && \
+   sudo rm code-server-$VERSION-linux-$TARGETARCH.tar.gz && \
+   sudo mv code-server-$VERSION-linux-$TARGETARCH /tmp/staging/usr/lib/code-server
 
 # This inherits from the hack above
 FROM ${TARGETOS}-${TARGETARCH} AS final
@@ -47,10 +48,10 @@ ARG TARGETARCH
 # Copy stuff from the staging folder of the 'builder' stage
 COPY --from=builder /tmp/staging /
 
-RUN sed -i 's/"$ROOT\/lib\/node"/node/g'  /usr/lib/code-server/bin/code-server
+RUN sudo sed -i 's/"$ROOT\/lib\/node"/node/g'  /usr/lib/code-server/bin/code-server
 
 COPY code-server /usr/bin/
-RUN chmod +x /usr/bin/code-server
+RUN sudo chmod +x /usr/bin/code-server
 
 EXPOSE 8080
 CMD code-server --bind-addr 0.0.0.0:8080 --auth none --disable-telemetry --disable-update-check \
