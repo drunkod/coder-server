@@ -61,7 +61,7 @@ RUN wget https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLAR
     sudo chown root:root  /tmp/staging/usr/bin/cloudflared
 
 # Download 'code-server'
-RUN wget wget https://github.com/cdr/code-server/releases/download/v${OPENVSCODE_VERSION}/code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}.tar.gz && \
+RUN wget wget https://github.com/cdr/code-server/releases/download/v${OPENVSCODE_VERSION}/code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
 # Unpack it
     tar -xf code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}.tar.gz && \
     rm code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}.tar.gz && \
