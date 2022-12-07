@@ -1,9 +1,9 @@
 # This is a hack to setuo alternate architecture names
 # For this to work, it needs to be built using docker 'buildx'
-FROM ghcr.io/drunkod/coder-core:latest AS linux-amd64
+FROM ghcr.io/drunkod/coder-core:master AS linux-amd64
 ARG ALT_ARCH=x64
 
-FROM ghcr.io/drunkod/coder-core:latest AS linux-arm64
+FROM ghcr.io/drunkod/coder-core:master AS linux-arm64
 ARG ALT_ARCH=arm64
 
 # This inherits from the hack above
