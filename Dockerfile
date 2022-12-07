@@ -63,17 +63,17 @@ RUN wget https://github.com/cloudflare/cloudflared/releases/download/${CLOUDFLAR
 # Download 'code-server'
 RUN wget wget https://github.com/cdr/code-server/releases/download/v${OPENVSCODE_VERSION}/code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
 # Unpack it
-    tar -xf code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}.tar.gz && \
-    rm code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}.tar.gz && \
+    tar -xf code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
+    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
 # Remove the 'node binary that comes with it
-    rm code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}/node && \
+    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node && \
 # Replacing it with a symlink
-    ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}/node && \
+    ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node && \
 # Remove pre-compiled binary node modules
     find . -name "*.node" -exec rm -rf {} \; && \
 # Put everything into a 'staging' folder
     sudo mkdir -p /tmp/staging/opt/ && \
-    sudo mv code-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH} /tmp/staging/opt/code-server && \
+    sudo mv code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH} /tmp/staging/opt/code-server && \
     sudo cp /tmp/node_modules/keytar/build/Release/keytar.node /tmp/staging/opt/code-server/node_modules/keytar/build/Release/keytar.node && \
     sudo cp /tmp/node_modules/node-pty/build/Release/pty.node /tmp/staging/opt/code-server/node_modules/node-pty/build/Release/pty.node && \
     sudo cp /tmp/node_modules/spdlog/build/Release/spdlog.node /tmp/staging/opt/code-server/node_modules/spdlog/build/Release/spdlog.node && \
