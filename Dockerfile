@@ -69,7 +69,7 @@ RUN wget https://github.com/coder/code-server/releases/download/v${OPENVSCODE_VE
 # Remove the 'node binary that comes with it
     rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Remove the 'argon2 binary that comes with it
-    rm openvscode-server-${OPENVSCODE_VERSION}-linux-${ALT_ARCH}/node_modules/argon2 && \     
+    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node_modules/argon2 && \     
 # Replacing it with a symlink
     ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Remove pre-compiled binary node modules
