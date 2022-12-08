@@ -69,7 +69,7 @@ RUN wget https://github.com/coder/code-server/releases/download/v${OPENVSCODE_VE
 # Remove the 'node binary that comes with it
     rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Remove the 'argon2 binary that comes with it
-    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node_modules/argon2 && \     
+    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node_modules/argon2/ && \     
 # Replacing it with a symlink
     ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Remove pre-compiled binary node modules
@@ -77,7 +77,7 @@ RUN wget https://github.com/coder/code-server/releases/download/v${OPENVSCODE_VE
 # Put everything into a 'staging' folder
     sudo mkdir -p /tmp/staging/opt/ && \
     sudo mv code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH} /tmp/staging/opt/code-server && \
-      sudo cp /tmp/node_modules/@node-rs/argon2 /tmp/staging/opt/code-server/node_modules/ && \
+      sudo cp /tmp/node_modules/@node-rs/argon2/ /tmp/staging/opt/code-server/node_modules/ && \
 #     sudo cp /tmp/node_modules/keytar/build/Release/keytar.node /tmp/staging/opt/code-server/node_modules/keytar/build/Release/keytar.node && \
 #     sudo cp /tmp/node_modules/node-pty/build/Release/pty.node /tmp/staging/opt/code-server/node_modules/node-pty/build/Release/pty.node && \
 #     sudo cp /tmp/node_modules/spdlog/build/Release/spdlog.node /tmp/staging/opt/code-server/node_modules/spdlog/build/Release/spdlog.node && \
