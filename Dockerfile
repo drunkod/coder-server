@@ -66,7 +66,7 @@ RUN wget https://github.com/cdr/code-server/releases/download/v${OPENVSCODE_VERS
     tar -xf code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
     rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}.tar.gz && \
 # Remove the 'node binary that comes with it
-    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node && \
+    rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Replacing it with a symlink
     ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node && \
 # Remove pre-compiled binary node modules
