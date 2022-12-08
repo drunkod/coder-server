@@ -29,6 +29,12 @@ ARG USERNAME=coder
 
 # Copy stuff from the staging folder of the 'builder' stage
 COPY --from=builder /tmp/staging /
+# Change user
+USER $USERNAME
+
+ENV PNPM_HOME=/home/$USERNAME/.local/share/pnpm
+
+ENV PATH=$PATH:$PNPM_HOME
 
 RUN sudo pnpm add --global code-server --unsafe-perm
 
