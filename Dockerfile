@@ -68,7 +68,7 @@ RUN wget https://github.com/coder/code-server/releases/download/v${OPENVSCODE_VE
 # Remove the 'node binary that comes with it
     rm code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Replacing it with a symlink
-    ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/node && \
+    ln -s /usr/bin/node ./code-server-${OPENVSCODE_VERSION}-linux-${TARGETARCH}/lib/node && \
 # Remove pre-compiled binary node modules
     find . -name "*.node" -exec rm -rf {} \; && \
 # Put everything into a 'staging' folder
