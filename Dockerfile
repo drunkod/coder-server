@@ -28,5 +28,5 @@ WORKDIR /home/$USERNAME
 EXPOSE 8080
 
 CMD code-server --bind-addr 0.0.0.0:8080 --auth none --disable-telemetry --disable-update-check \
-    --proxy-domain ${PROXY_DOMAIN} --config /config/.config/code-server/config.yaml \
+     --config /config/.config/code-server/config.yaml \
     --user-data-dir /config/data --extensions-dir /config/extensions
