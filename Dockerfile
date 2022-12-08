@@ -88,7 +88,14 @@ ARG TARGETARCH
 # Copy stuff from the staging folder of the 'builder' stage
 COPY --from=builder /tmp/staging /
 
+ARG USERNAME=coder
+# Change user
+USER $USERNAME
+
 ENV PATH=$PATH:/opt/code-server/bin
+
+WORKDIR /home/$USERNAME
+
 EXPOSE 8080
 
 CMD code-server --bind-addr 0.0.0.0:8080 --auth none --disable-telemetry --disable-update-check \
