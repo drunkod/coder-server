@@ -16,16 +16,6 @@ RUN sudo apk --no-cache add build-base libsecret-dev python3 wget nano
 # Setup a dummy project
 RUN sudo npm install --global code-server --unsafe-perm
 
-# Add PNPM
-ARG PNPM_VERSION=7.18.1
-
-ENV PNPM_HOME=/root/.local/share/pnpm
-ENV PATH=$PATH:$PNPM_HOME
-
-RUN apk add --no-cache curl && \
-  curl -fsSL "https://github.com/pnpm/pnpm/releases/download/v${PNPM_VERSION}/pnpm-linuxstatic-arm64" -o /bin/pnpm && chmod +x /bin/pnpm && \
-  apk del curl
-
 # Put everything into a 'staging' folder
 RUN sudo mkdir -p /tmp/staging/usr/local/lib/node_modules/ && \
     sudo mv /usr/local/lib/node_modules/code-server/ /tmp/staging/usr/local/lib/node_modules/code-server && \
