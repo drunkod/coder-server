@@ -18,8 +18,8 @@ RUN sudo npm install --global code-server --unsafe-perm
 RUN sudo npm install -g pnpm
 
 # Put everything into a 'staging' folder
-RUN sudo mkdir -p /tmp/staging/opt/ && \
-    sudo mv /usr/local/lib/node_modules/code-server /tmp/staging/usr/local/lib/node_modules/code-server && \
+RUN sudo mkdir -p /tmp/staging/usr/local/lib/node_modules/ && \
+    sudo mv /usr/local/lib/node_modules/code-server/ /tmp/staging/usr/local/lib/node_modules/code-server && \
     sudo chown -R root:root /tmp/staging/usr/local/lib/node_modules/code-server
     
 # This inherits from the hack above
