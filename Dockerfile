@@ -18,7 +18,7 @@ ARG USERNAME=coder
 USER $USERNAME
 
 # Install npm, nodejs and some tools required to build native node modules 
-RUN sudo apk --no-cache add npm build-base libsecret-dev python3 wget
+RUN sudo apk --no-cache add build-base libsecret-dev python3 wget
 
 # Setup a dummy project
 RUN npm install --global code-server --unsafe-perm
