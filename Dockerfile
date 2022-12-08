@@ -36,6 +36,8 @@ ENV PNPM_HOME=/home/$USERNAME/.local/share/pnpm
 
 ENV PATH=$PATH:$PNPM_HOME
 
+RUN echo $PATH && \
+    source ~/.bashrc
 RUN sudo pnpm add --global code-server --unsafe-perm
 
 WORKDIR /home/$USERNAME
