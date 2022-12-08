@@ -31,7 +31,8 @@ ARG USERNAME=coder
 # Copy stuff from the staging folder of the 'builder' stage
 COPY --from=builder /tmp/staging /
 
-RUN sudo pnpm install --global code-server --unsafe-perm
+RUN sudo npm install -g pnpm
+RUN sudo pnpm add --global code-server --unsafe-perm
 
 WORKDIR /home/$USERNAME
 
