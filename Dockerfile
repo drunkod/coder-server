@@ -21,7 +21,7 @@ USER $USERNAME
 RUN sudo apk --no-cache add build-base libsecret-dev python3 wget
 
 # Setup a dummy project
-RUN npm install --global code-server --unsafe-perm
+RUN sudo npm install --global code-server --unsafe-perm
 
 WORKDIR /home/$USERNAME
 
