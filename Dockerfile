@@ -1,16 +1,24 @@
 # This is a hack to set up alternate architecture names
 # For this to work, it needs to be built using docker 'buildx'
-FROM ghcr.io/drunkod/coder-core:master AS linux-amd64   # Define a new stage for building the image for amd64 architecture
-ARG ALT_ARCH=x64    # Define a build argument for alternate architecture name, set to x64 by default
+# Define a new stage for building the image for amd64 architecture
+FROM ghcr.io/drunkod/coder-core:master AS linux-amd64
+# Define a build argument for alternate architecture name, set to x64 by default   
+ARG ALT_ARCH=x64    
 
-FROM ghcr.io/drunkod/coder-core:master AS linux-arm64    # Define a new stage for building the image for arm64 architecture
-ARG ALT_ARCH=arm64   # Define a build argument for alternate architecture name, set to arm64 for arm64 stage
+# Define a new stage for building the image for arm64 architecture
+FROM ghcr.io/drunkod/coder-core:master AS linux-arm64 
+# Define a build argument for alternate architecture name, set to arm64 for arm64 stage
+ARG ALT_ARCH=arm64   
 
 # This is the builder stage, where we install dependencies and set up the staging folder
-FROM ${TARGETOS}-${TARGETARCH} AS builder   # Define a new stage for building the image, based on the target OS and architecture
-ARG TARGETARCH   # Define a build argument for the target architecture
-ARG OPENVSCODE_VERSION=4.9.0   # Define a build argument for the VS Code version
-ARG USERNAME=coder   # Define a build argument for the default username
+# Define a new stage for building the image, based on the target OS and architecture
+FROM ${TARGETOS}-${TARGETARCH} AS builder  
+# Define a build argument for the target architecture
+ARG TARGETARCH   
+# Define a build argument for the VS Code version
+ARG OPENVSCODE_VERSION=4.9.0
+# Define a build argument for the default username
+ARG USERNAME=coder   
 
 # Install npm, nodejs and some tools required to build native node modules 
 RUN sudo apk --no-cache add build-base libsecret-dev python3 wget nano
@@ -26,14 +34,17 @@ USER $USERNAME
 
 # This inherits from the hack above
 # This is the final stage, where we copy files from the builder stage and start the server
-FROM ${TARGETOS}-${TARGETARCH} AS final   # Define a new stage for building the final image, based on the target OS and architecture
-ARG TARGETARCH   # Define a build argument for the target architecture
-# ARG USERNAME=coder   # Define a build argument for the default username
+# Define a new stage for building the final image, based on the target OS and architecture
+FROM ${TARGETOS}-${TARGETARCH} AS final
+# Define a build argument for the target architecture
+ARG TARGETARCH
+# Define a build argument for the default username   
+# ARG USERNAME=coder   
 
 
 
-# Copy stuff from the staging folder of the 'builder' stage
-COPY --from=builder /tmp/staging /   # Copy the staging folder from the builder stage to the final stage root directory
+# Copy the staging folder from the builder stage to the final stage root directory
+COPY --from=builder /tmp/staging /   
 
 # Change user to 'coder'
 # USER $USERNAME
