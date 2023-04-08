@@ -18,7 +18,7 @@ ARG TARGETARCH
 # Define a build argument for the VS Code version
 ARG OPENVSCODE_VERSION=4.9.0
 # Define a build argument for the default username
-ARG USERNAME=coder   
+# ARG USERNAME=coder   
 
 # Install npm, nodejs and some tools required to build native node modules 
 RUN apk --no-cache add build-base libsecret-dev python3 wget nano
@@ -28,9 +28,7 @@ RUN apk --no-cache add build-base libsecret-dev python3 wget nano
 # RUN sudo mkdir -p /tmp/staging/usr/local/lib/node_modules/ && \
 #     sudo mv /usr/local/lib/node_modules/code-server/ /tmp/staging/usr/local/lib/node_modules/code-server && \
 #     sudo chown -R root:root /tmp/staging/usr/local/lib/node_modules/code-server
-    
-# Reliquish root powers
-USER $USERNAME   
+  
 
 # This inherits from the hack above
 # This is the final stage, where we copy files from the builder stage and start the server
@@ -39,15 +37,15 @@ FROM ${TARGETOS}-${TARGETARCH} AS final
 # Define a build argument for the target architecture
 ARG TARGETARCH
 # Define a build argument for the default username   
-# ARG USERNAME=coder   
+ARG USERNAME=coder   
 
 
 
 # Copy the staging folder from the builder stage to the final stage root directory
 # COPY --from=builder /tmp/staging /   
 
-# Change user to 'coder'
-# USER $USERNAME
+Change user to 'coder'
+USER $USERNAME
 
 # Set up the environment
 RUN echo $PATH && \
