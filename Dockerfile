@@ -44,7 +44,7 @@ ARG USERNAME=coder
 # Copy the staging folder from the builder stage to the final stage root directory
 # COPY --from=builder /tmp/staging /   
 
-Change user to 'coder'
+# Change user to 'coder'
 USER $USERNAME
 
 # Set up the environment
