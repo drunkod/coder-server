@@ -44,7 +44,7 @@ ARG TARGETARCH
 
 
 # Copy the staging folder from the builder stage to the final stage root directory
-COPY --from=builder /tmp/staging /   
+# COPY --from=builder /tmp/staging /   
 
 # Change user to 'coder'
 # USER $USERNAME
