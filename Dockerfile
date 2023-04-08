@@ -1,12 +1,12 @@
 # This is a hack to set up alternate architecture names
 # For this to work, it needs to be built using docker 'buildx'
 # Define a new stage for building the image for amd64 architecture
-FROM ghcr.io/drunkod/coder-core:ffmpeg AS linux-amd64
+FROM jrottenberg/ffmpeg:alpine AS linux-amd64
 # Define a build argument for alternate architecture name, set to x64 by default   
 ARG ALT_ARCH=x64    
 
 # Define a new stage for building the image for arm64 architecture
-FROM ghcr.io/drunkod/coder-core:ffmpeg AS linux-arm64 
+FROM jrottenberg/ffmpeg:alpine AS linux-arm64 
 # Define a build argument for alternate architecture name, set to arm64 for arm64 stage
 ARG ALT_ARCH=arm64   
 
@@ -21,13 +21,13 @@ ARG OPENVSCODE_VERSION=4.9.0
 ARG USERNAME=coder   
 
 # Install npm, nodejs and some tools required to build native node modules 
-RUN sudo apk --no-cache add build-base libsecret-dev python3 wget nano
+RUN apk --no-cache add build-base libsecret-dev python3 wget nano
 
 # Setup a dummy project and put everything into a 'staging' folder
-RUN sudo npm install --global code-server --unsafe-perm
-RUN sudo mkdir -p /tmp/staging/usr/local/lib/node_modules/ && \
-    sudo mv /usr/local/lib/node_modules/code-server/ /tmp/staging/usr/local/lib/node_modules/code-server && \
-    sudo chown -R root:root /tmp/staging/usr/local/lib/node_modules/code-server
+# RUN sudo npm install --global code-server --unsafe-perm
+# RUN sudo mkdir -p /tmp/staging/usr/local/lib/node_modules/ && \
+#     sudo mv /usr/local/lib/node_modules/code-server/ /tmp/staging/usr/local/lib/node_modules/code-server && \
+#     sudo chown -R root:root /tmp/staging/usr/local/lib/node_modules/code-server
     
 # Reliquish root powers
 USER $USERNAME   
