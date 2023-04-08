@@ -37,22 +37,12 @@ FROM ${TARGETOS}-${TARGETARCH} AS final
 # Define a build argument for the target architecture
 ARG TARGETARCH
 # Define a build argument for the default username   
-ARG USERNAME=coder   
+# ARG USERNAME=coder   
 
 
 
 # Copy the staging folder from the builder stage to the final stage root directory
-# COPY --from=builder /tmp/staging /   
-
-# Change user to 'coder'
-USER $USERNAME
-
-# Set up the environment
-RUN echo $PATH && \
-    source ~/.bashrc
-
-# Set the working directory to the home directory of the 'coder' user
-WORKDIR /home/$USERNAME
+ COPY --from=builder /usr/local /usr/local
 
 # Expose port 8080 for the server
 EXPOSE 8080
