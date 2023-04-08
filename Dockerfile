@@ -1,12 +1,12 @@
 # This is a hack to set up alternate architecture names
 # For this to work, it needs to be built using docker 'buildx'
 # Define a new stage for building the image for amd64 architecture
-FROM ghcr.io/drunkod/coder-core:master AS linux-amd64
+FROM ghcr.io/drunkod/coder-core:node AS linux-amd64
 # Define a build argument for alternate architecture name, set to x64 by default   
 ARG ALT_ARCH=x64    
 
 # Define a new stage for building the image for arm64 architecture
-FROM ghcr.io/drunkod/coder-core:master AS linux-arm64 
+FROM ghcr.io/drunkod/coder-core:node AS linux-arm64 
 # Define a build argument for alternate architecture name, set to arm64 for arm64 stage
 ARG ALT_ARCH=arm64   
 
